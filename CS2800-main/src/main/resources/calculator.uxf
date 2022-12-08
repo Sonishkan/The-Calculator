@@ -1,0 +1,215 @@
+<diagram program="umletino" version="15.0.0"><zoom_level>7</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>533</x><y>1281</y><w>168</w><h>168</h></coordinates><panel_attributes>&lt;&lt;enumeration&gt;&gt;
+cs2800::Symbol
+Enum class to hold a list of symbols
+ that the entry object can represent.
+--
+_-LEFT_BRACKET_
+_-RIGHT_BRACKET_
+_-TIMES_
+_-DIVIDE_
+_-PLUS_
+_-MINUS_
+_-INVALID_
+--
+Responsibilities
+-- &lt;&lt;constructor&gt;&gt; +Symbol(String value)
+-- toString(): String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>764</x><y>1162</y><w>168</w><h>168</h></coordinates><panel_attributes>cs2800::Entry
+Entry is a container class for either a 
+Float or a Symbol.
+--
+Attributes
+-number: float
+- other: Symbol
+-type: Type
+--
+Responsibilities
+-- &lt;&lt;constructor&gt;&gt; +Entry()
+-- &lt;&lt;constructor&gt;&gt; +Entry(float number)
+-- &lt;&lt;constructor&gt;&gt; +Entry(Symbol other)
++ getValue(): float
+                    {Exception=BadType}
++ getType(): Type
+                    {Exception=BadType}
++ getSymbol(): Symbol
+                    {Exception=BadType}</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>974</x><y>1309</y><w>168</w><h>126</h></coordinates><panel_attributes>&lt;&lt;enumeration&gt;&gt;
+cs2800::Type
+ENUM class for list of the types an 
+Entry can represent.
+--
+_-NUMBER_
+_-SYMBOL_
+_-INVALID_
+--
+Responsibilities
+-- &lt;&lt;constructor&gt;&gt; +Type(String value)
+-- toString(): String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>757</x><y>917</y><w>168</w><h>168</h></coordinates><panel_attributes>cs2800::RhulStack
+Creating a stack of entry objects.
+--
+Attributes
+# size: int
+# stack: List&lt;Entry&gt;
+--
+Responsibilities
++ push(Entry entry)
+        adds a new Entry to the Stack
++ pop(): Entry {Exception=EmptyStack}
+        returns (and removes) newest Entry
++ top(): Entry {Exception=EmptyStack}
+        return (but keeps) newset Entry
++ size(): int
+        return number of entries
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>750</x><y>623</y><w>168</w><h>126</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+cs2800::Calculator
+Allows the calculation of string 
+expressions.
+--
+Responsibilities
++ evaluate(String: expression): float
+        {exception=InvalidExpression}
+        {exception=BadType}</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>547</x><y>455</y><w>182</w><h>133</h></coordinates><panel_attributes>cs2800::RevPolCalc
+This method evaluates the postfix 
+expression, performs the necessary
+calculation and returns the result.
+--
+Attributes
+- values: NumStack
+--
+Responsibilities
++ evaluate(String: expression): float
+        {exception=InvalidExpression}
+        {exception=BadType}
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>967</x><y>406</y><w>182</w><h>189</h></coordinates><panel_attributes>cs2800::StandardCalc
+Evaluates infix String expressions 
+by converting to postfix.
+--
+Attributes
+- values: OpStack
+- rpCalc: RevPolCalc
+--
+Responsibilities
++ evaluate(String: expression): float
+        {exception=InvalidExpression}
+        {exception=BadType}
+- returnSymbol(String symbol): Symbol
+- getPrecedenceLevel(Symbol operator): int
+        {exception=InvalidExpression}
+- lowerPrecedence(Symbol operator 1, 
+                             Symbol operator2): boolean
+        {exception=InvalidExpression}</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>771</x><y>238</y><w>182</w><h>133</h></coordinates><panel_attributes>«model»
+cs2800::CalcModel
+This class handles the calling 
+of the 2 evaluate methods.
+--
+Attributes
+- infix: Calculator
+- postfix: Calculator
+--
+Responsibilities
++ evaluate(expr: String, infix:boolean): float
+        {exception=InvalidExpression}
+        {exception=BadType}
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>757</x><y>1575</y><w>189</w><h>91</h></coordinates><panel_attributes>«exception»
+cs2800::BadTypeException
+Creating a custom exception when 
+calling methods on entry types 
+that don't support it.
+--
+Responsibilities
++ BadTypeException(String message)
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>743</x><y>791</y><w>189</w><h>84</h></coordinates><panel_attributes>«exception»
+cs2800::InvalidExpressionException
+This exception occurs when the
+ expression is invalid in some way.
+--
+Responsibilities
++ InvalidExpressionException(String message)
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>64</x><y>238</y><w>189</w><h>91</h></coordinates><panel_attributes>cs2800::CalcDriver
+This is the driver class for 
+the application, it creates runs the GUI. 
+--
+Responsibilities
+_+ main(String[] args): void_
++ start(Stage primaryStage): void
+        {exception=Exception}
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>267</x><y>238</y><w>210</w><h>280</h></coordinates><panel_attributes>cs2800::MainView
+This class manipulates the gui attributes.
+It shows the evaluation of the 
+expression given.
+--
+Attributes
+- expression: String
+- answer: String
+- isInfix: boolean
+- calculator: CalcModel
+FXML Attributes
+- buttonBar: ButtonBar
+- evaluateButton: Button
+- expressionAnswer: TextField
+- expressionLable: Label
+- resultLable: Label
+- expressionText: TextField
+- infixButton: RadioButton
+- postfixButton: RadioButton
+- title: Label
+- type: ToggleGroup
+--
+FXML Responsibilities
++ radioCheck(ActionEvent event): void
++ evaluateButtonPressed(ActionEvent event) : void
+        {exception=InvalidExpression}
+        {exception=BadType}
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLState</id><coordinates><x>50</x><y>203</y><w>441</w><h>336</h></coordinates><panel_attributes>GUI VIEW ASSEMBLY
+halign=center
+valign=top
+bg=blue
+layer=-5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLState</id><coordinates><x>505</x><y>196</y><w>679</w><h>1491</h></coordinates><panel_attributes>MODEL ASSEMBLY
+halign=center
+valign=top
+bg=red
+layer=-5
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>610</x><y>1190</y><w>168</w><h>105</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>220;10;10;130</additional_attributes></element><element><id>Relation</id><coordinates><x>925</x><y>1190</y><w>105</w><h>133</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;130;170</additional_attributes></element><element><id>Relation</id><coordinates><x>834</x><y>1078</y><w>42</w><h>98</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+(0..*)</panel_attributes><additional_attributes>10;10;10;120</additional_attributes></element><element><id>Relation</id><coordinates><x>687</x><y>791</y><w>84</w><h>189</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+&lt;&lt;facade&gt;&gt;</panel_attributes><additional_attributes>10;10;100;250</additional_attributes></element><element><id>Relation</id><coordinates><x>918</x><y>875</y><w>154</w><h>98</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+&lt;&lt;facade&gt;&gt;</panel_attributes><additional_attributes>200;10;10;120</additional_attributes></element><element><id>Relation</id><coordinates><x>610</x><y>581</y><w>35</w><h>196</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>30;10;10;260</additional_attributes></element><element><id>UMLClass</id><coordinates><x>995</x><y>728</y><w>168</w><h>154</h></coordinates><panel_attributes>cs2800::OpStack
+OpStack uses a RhulStack of symbols,
+this is then used for the 
+shunting algorithm. 
+--
+Attributes
+# opStack: RhulStack
+--
+Responsibilities
+-- &lt;&lt;constructor&gt;&gt; +OpStack()
+        initialises opStack as RhulStack
++ isEmpty(): boolean 
++ push(Symbol symbol)
++ pop(): Symbol {Exception=EmptyStack}
+        {Exception=BadType}
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>526</x><y>763</y><w>168</w><h>168</h></coordinates><panel_attributes>cs2800::NumStack
+NumStack uses a RhulStack of floats, 
+this is because reverse polish notation
+ only uses a Stack of numeric values. 
+--
+Attributes
+# numStack: RhulStack
+--
+Responsibilities
+-- &lt;&lt;constructor&gt;&gt; +NumStack()
+        initialises numStack as RhulStack
++ isEmpty(): boolean 
++ push(float num)
++ pop(): float {Exception=EmptyStack}
+        {Exception=BadType}</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1044</x><y>588</y><w>63</w><h>154</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+(1)</panel_attributes><additional_attributes>10;10;70;200</additional_attributes></element><element><id>Relation</id><coordinates><x>869</x><y>504</y><w>112</w><h>133</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;170;140;10</additional_attributes></element><element><id>Relation</id><coordinates><x>722</x><y>525</y><w>91</w><h>112</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>110;140;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>162</x><y>322</y><w>119</w><h>98</h></coordinates><panel_attributes>lt=&lt;..
+&lt;&lt;knows of&gt;&gt;</panel_attributes><additional_attributes>150;120;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>834</x><y>364</y><w>35</w><h>273</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>30;10;10;370</additional_attributes></element><element><id>Relation</id><coordinates><x>687</x><y>287</y><w>98</w><h>182</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>120;10;10;240</additional_attributes></element><element><id>Relation</id><coordinates><x>946</x><y>280</y><w>133</w><h>140</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;170;180</additional_attributes></element><element><id>Relation</id><coordinates><x>470</x><y>252</y><w>315</w><h>21</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>430;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>666</x><y>581</y><w>91</w><h>224</h></coordinates><panel_attributes>lt=&lt;..
+&lt;&lt;throws&gt;&gt;</panel_attributes><additional_attributes>110;300;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>918</x><y>588</y><w>91</w><h>217</h></coordinates><panel_attributes>lt=&lt;..
+&lt;&lt;throws&gt;&gt;</panel_attributes><additional_attributes>10;290;110;10</additional_attributes></element><element><id>Relation</id><coordinates><x>841</x><y>1323</y><w>56</w><h>266</h></coordinates><panel_attributes>lt=&lt;..
+&lt;&lt;throws&gt;&gt;</panel_attributes><additional_attributes>10;360;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>722</x><y>427</y><w>259</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+(1)</panel_attributes><additional_attributes>350;10;10;80</additional_attributes></element></diagram>

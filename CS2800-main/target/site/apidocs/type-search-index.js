@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"uk.ac.rhul.cs2800","l":"BadTypeException"},{"p":"uk.ac.rhul.cs2800","l":"Entry"},{"p":"uk.ac.rhul.cs2800","l":"RhulStack"},{"p":"uk.ac.rhul.cs2800","l":"Symbol"},{"p":"uk.ac.rhul.cs2800","l":"Type"}];updateSearchResults();
